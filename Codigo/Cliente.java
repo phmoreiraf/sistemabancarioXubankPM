@@ -8,6 +8,13 @@ public abstract class Cliente {
     private String senha;
     private List<Conta> contas;
 
+     public Cliente(String nome, String cpf, String senha) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.contas = new ArrayList<>();
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -40,13 +47,6 @@ public abstract class Cliente {
         return contas;
     }
 
-    public Cliente(String nome, String cpf, String senha) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-        this.contas = new ArrayList<>();
-    }
-
     public void adicionarConta(Conta conta) {
         this.contas.add(conta);
     }
@@ -57,20 +57,36 @@ public abstract class Cliente {
         }
     }
 
-    public void depositar(double valor, Conta conta) {
-        conta.depositar(valor);
-    }
-
-    public void sacar(double valor, Conta conta) {
-        conta.sacar(valor);
-    }
-
-    public void transferir(double valor, Conta contaOrigem, Conta contaDestino) {
-        if (contaOrigem.getSaldo() >= valor) {
-            contaOrigem.sacar(valor);
-            contaDestino.depositar(valor);
+    public void depositar(double valor, int indiceConta) {
+        if (indiceConta >= 0 && indiceConta < contas.size()) {
+            contas.get(indiceConta).depositar(valor);
         } else {
-            System.out.println("Saldo insuficiente para transferência!");
+            System.out.println("Índice de conta inválido!");
         }
     }
+    
+    public void sacar(double valor, int indiceConta) {
+        if (indiceConta >= 0 && indiceConta < contas.size()) {
+            contas.get(indiceConta).sacar(valor);
+        } else {
+            System.out.println("Índice de conta inválido!");
+        }
+    }
+    
+    public void transferir(double valor, int indiceContaOrigem, int indiceContaDestino) {
+        if (indiceContaOrigem >= 0 && indiceContaOrigem < contas.size() &&
+            indiceContaDestino >= 0 && indiceContaDestino < contas.size()) {
+            Conta contaOrigem = contas.get(indiceContaOrigem);
+            Conta contaDestino = contas.get(indiceContaDestino);
+            if (contaOrigem.getSaldo() >= valor) {
+                contaOrigem.sacar(valor);
+                contaDestino.depositar(valor);
+            } else {
+                System.out.println("Saldo insuficiente para transferência!");
+            }
+        } else {
+            System.out.println("Índice de conta inválido!");
+        }
+    }
+    
 }
