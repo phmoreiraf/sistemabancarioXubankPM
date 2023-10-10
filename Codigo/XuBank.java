@@ -38,8 +38,7 @@ public class XuBank {
             switch (opcao) {
                 case 1:
                     // Criação de uma conta
-                    System.out.println(
-                            "Digite o tipo de conta a ser criada (1 - Corrente, 2 - Poupança, 3 - Renda Fixa, 4 - Investimento):");
+                    System.out.println("Digite o tipo de conta a ser criada (1 - Corrente, 2 - Poupança, 3 - Renda Fixa, 4 - Investimento):");
                     int tipoConta = scanner.nextInt();
 
                     if (tipoConta == 1) {
