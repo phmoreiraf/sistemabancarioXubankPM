@@ -19,7 +19,6 @@ public class XuBank {
 
         Cliente cliente = new ClienteReal(nome, cpf, senha);
 
-
         boolean sair = false;
         while (!sair) {
             System.out.println("Escolha uma opção:");
