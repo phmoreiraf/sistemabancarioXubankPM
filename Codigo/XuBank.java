@@ -7,8 +7,6 @@ public class XuBank {
 
         Scanner scanner = new Scanner(System.in);
 
-        Cliente cliente = new Cliente(null, null, null);
-
         // Criação de um cliente
         System.out.println("Digite o nome do cliente:");
         String nome = scanner.nextLine();
@@ -19,7 +17,8 @@ public class XuBank {
         System.out.println("Digite a senha do cliente:");
         String senha = scanner.nextLine();
 
-        cliente(nome, cpf, senha);
+        Cliente cliente = new ClienteReal(nome, cpf, senha);
+
 
         boolean sair = false;
         while (!sair) {

@@ -88,5 +88,10 @@ public abstract class Cliente {
             System.out.println("Índice de conta inválido!");
         }
     }
-    
 }
+
+  class ClienteReal extends Cliente {
+        public ClienteReal(String nome, String cpf, String senha) {
+            super(nome, cpf, senha);
+        }
+    }
