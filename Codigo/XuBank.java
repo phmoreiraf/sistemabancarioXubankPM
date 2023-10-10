@@ -2,7 +2,10 @@ package Codigo;
 
 import java.util.*;
 
+import javax.swing.text.AbstractDocument.Content;
+
 public class XuBank {
+    
     private List<Cliente> clientes = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
@@ -70,15 +73,15 @@ public class XuBank {
         if (cliente != null && cliente.getSenha().equals(senha)) {
             System.out.print("Escolha a conta (1 - Conta Corrente, 2 - Conta Poupança): ");
             int escolhaConta = scanner.nextInt();
-            List<Conta> contasCliente = cliente.getContas();
+            List<Content> contasCliente = cliente.getContas();
 
             if (escolhaConta == 1 && contasCliente.size() >= 1) {
-                Conta conta = contasCliente.get(0); // Assumindo que o cliente tem apenas uma Conta Corrente
+                Conta conta = (Conta) contasCliente.get(0); // Assumindo que o cliente tem apenas uma Conta Corrente
                 conta.atualizarSaldo();
                 double saldo = conta.getSaldo();
                 System.out.println("Saldo atual: R$" + saldo);
             } else if (escolhaConta == 2 && contasCliente.size() >= 2) {
-                Conta conta = contasCliente.get(1); // Assumindo que o cliente tem apenas uma Conta Poupança
+                Conta conta = (Conta) contasCliente.get(1); // Assumindo que o cliente tem apenas uma Conta Poupança
                 conta.atualizarSaldo();
                 double saldo = conta.getSaldo();
                 System.out.println("Saldo atual: R$" + saldo);
@@ -100,7 +103,7 @@ public class XuBank {
         if (cliente != null && cliente.getSenha().equals(senha)) {
             System.out.print("Escolha a conta (1 - Conta Corrente, 2 - Conta Poupança): ");
             int escolhaConta = scanner.nextInt();
-            List<Conta> contasCliente = cliente.getContas();
+            List<Content> contasCliente = cliente.getContas();
 
             if (escolhaConta == 1 && contasCliente.size() >= 1) {
                 ContaCorrente conta = (ContaCorrente) contasCliente.get(0); // Assumindo que o cliente tem apenas uma Conta Corrente
@@ -132,7 +135,7 @@ public class XuBank {
         if (cliente != null && cliente.getSenha().equals(senha)) {
             System.out.print("Escolha a conta (1 - Conta Corrente, 2 - Conta Poupança): ");
             int escolhaConta = scanner.nextInt();
-            List<Conta> contasCliente = cliente.getContas();
+            List<Content> contasCliente = cliente.getContas();
 
             if (escolhaConta == 1 && contasCliente.size() >= 1) {
                 ContaCorrente conta = (ContaCorrente) contasCliente.get(0); // Assumindo que o cliente tem apenas uma Conta Corrente
@@ -170,7 +173,7 @@ public class XuBank {
         if (cliente != null && cliente.getSenha().equals(senha)) {
             System.out.print("Escolha a conta de origem (1 - Conta Corrente, 2 - Conta Poupança): ");
             int escolhaContaOrigem = scanner.nextInt();
-            List<Conta> contasCliente = cliente.getContas();
+            List<Content> contasCliente = cliente.getContas();
 
             if (escolhaContaOrigem == 1 && contasCliente.size() >= 1) {
                 ContaCorrente contaOrigem = (ContaCorrente) contasCliente.get(0); // Assumindo que o cliente tem apenas uma Conta Corrente
@@ -181,9 +184,9 @@ public class XuBank {
 
                 Cliente destinatario = encontrarClientePorCpf(xubank, cpfDestinatario);
                 if (destinatario != null) {
-                    List<Conta> contasDestinatario = destinatario.getContas();
+                    List<Content> contasDestinatario = destinatario.getContas();
                     if (!contasDestinatario.isEmpty()) {
-                        Conta contaDestinatario = contasDestinatario.get(0); // Assumindo que o destinatário tem apenas uma conta
+                        Conta contaDestinatario = (Conta) contasDestinatario.get(0); // Assumindo que o destinatário tem apenas uma conta
                         if (contaOrigem.sacar(valorTransferencia)) {
                             contaDestinatario.depositar(valorTransferencia);
                             System.out.println("Transferência realizada com sucesso.");
@@ -205,9 +208,9 @@ public class XuBank {
 
                 Cliente destinatario = encontrarClientePorCpf(xubank, cpfDestinatario);
                 if (destinatario != null) {
-                    List<Conta> contasDestinatario = destinatario.getContas();
+                    List<Content> contasDestinatario = destinatario.getContas();
                     if (!contasDestinatario.isEmpty()) {
-                        Conta contaDestinatario = contasDestinatario.get(0); // Assumindo que o destinatário tem apenas uma conta
+                        Conta contaDestinatario = (Conta) contasDestinatario.get(0); // Assumindo que o destinatário tem apenas uma conta
                         if (contaOrigem.sacar(valorTransferencia)) {
                             contaDestinatario.depositar(valorTransferencia);
                             System.out.println("Transferência realizada com sucesso.");

@@ -2,11 +2,13 @@ package Codigo;
 
 import java.util.*;
 
+import javax.swing.text.AbstractDocument.Content;
+
 public class Cliente {
     private String nome;
     private String cpf;
     private String senha;
-    private List<Conta> contas;
+    private List<Content> contas;
 
     public Cliente(String nome, String cpf, String senha) {
         this.nome = nome;
@@ -27,7 +29,7 @@ public class Cliente {
         this.senha = senha;
     }
 
-    public void setContas(List<Conta> contas) {
+    public void setContas(List<Content> contas) {
         this.contas = contas;
     }
 
@@ -43,11 +45,11 @@ public class Cliente {
         return senha;
     }
 
-    public List<Conta> getContas() {
+    public List<Content> getContas() {
         return contas;
     }
 
-    public void adicionarConta(Conta conta) {
+    public void adicionarConta(Content conta) {
         contas.add(conta);
     }
 }
