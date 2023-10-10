@@ -2,22 +2,13 @@ package Codigo;
 
 import java.util.*;
 
-import javax.swing.text.AbstractDocument.Content;
-
-public class Cliente {
+public abstract class Cliente {
     private String nome;
     private String cpf;
     private String senha;
-    private List<Content> contas;
+    private List<Conta> contas;
 
-    public Cliente(String nome, String cpf, String senha) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-        this.contas = new ArrayList<>();
-    }
-
-     public void setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -29,7 +20,7 @@ public class Cliente {
         this.senha = senha;
     }
 
-    public void setContas(List<Content> contas) {
+    public void setContas(List<Conta> contas) {
         this.contas = contas;
     }
 
@@ -45,11 +36,41 @@ public class Cliente {
         return senha;
     }
 
-    public List<Content> getContas() {
+    public List<Conta> getContas() {
         return contas;
     }
 
-    public void adicionarConta(Content conta) {
-        contas.add(conta);
+    public Cliente(String nome, String cpf, String senha) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.contas = new ArrayList<>();
+    }
+
+    public void adicionarConta(Conta conta) {
+        this.contas.add(conta);
+    }
+
+    public void consultarSaldo() {
+        for (Conta conta : contas) {
+            System.out.println("Saldo da conta: " + conta.getSaldo());
+        }
+    }
+
+    public void depositar(double valor, Conta conta) {
+        conta.depositar(valor);
+    }
+
+    public void sacar(double valor, Conta conta) {
+        conta.sacar(valor);
+    }
+
+    public void transferir(double valor, Conta contaOrigem, Conta contaDestino) {
+        if (contaOrigem.getSaldo() >= valor) {
+            contaOrigem.sacar(valor);
+            contaDestino.depositar(valor);
+        } else {
+            System.out.println("Saldo insuficiente para transferência!");
+        }
     }
 }
