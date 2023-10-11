@@ -2,7 +2,14 @@ package Codigo;
 
 import java.util.*;
 
-public abstract class Conta {
+public interface ContaInterface {
+    void depositar(double valor);
+    void sacar(double valor);
+    void registrarTransacao(String transacao);
+    void atualizarSaldo();
+}
+
+abstract class Conta implements ContaInterface {
     private double saldo;
     private Cliente cliente;
     private List<String> extrato;
@@ -43,7 +50,6 @@ public abstract class Conta {
 
     public abstract void atualizarSaldo();
 }
-
 
 
 class ContaCorrente extends Conta {
