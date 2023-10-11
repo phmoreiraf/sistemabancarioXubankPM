@@ -6,6 +6,9 @@ public class XuBank {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        
+        Conta contaCorrente;
+        Cliente cliente;
 
         // Criação de um cliente
         System.out.println("Digite o nome do cliente:");
@@ -17,9 +20,36 @@ public class XuBank {
         System.out.println("Digite a senha do cliente:");
         String senha = scanner.nextLine();
 
-        Cliente cliente = new ClienteReal(nome, cpf, senha);
+        System.out.println("Escolha o tipo de cliente:");
+        System.out.println("1. Regular");
+        System.out.println("2. Gold");
+        System.out.println("3. VIP");
+
+        int tipoCliente = scanner.nextInt();
+
+        switch (tipoCliente) {
+            case 1:
+                String regular = "Conta regular";
+                cliente = new Regular(nome, cpf, senha, regular);
+                break;
+            case 2:
+                String gold = "Conta gold";
+                cliente = new Gold(nome, cpf, senha, gold);
+                break;
+            case 3:
+                String vip = "Conta vip";
+                cliente = new VIP(nome, cpf, senha, vip);
+                break;
+            default:
+                System.out.println("Tipo de cliente inválido!");
+                scanner.close();
+                return;
+        }
+
+        contaCorrente = new ContaCorrente(cliente);
 
         boolean sair = false;
+
         while (!sair) {
             System.out.println("Escolha uma opção:");
             System.out.println("1 - Criar conta");
@@ -31,12 +61,13 @@ public class XuBank {
             System.out.println("0 - Sair");
 
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consume newline left-over
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
                     // Criação de uma conta
-                    System.out.println("Digite o tipo de conta a ser criada (1 - Corrente, 2 - Poupança, 3 - Renda Fixa, 4 - Investimento):");
+                    System.out.println(
+                            "Digite o tipo de conta a ser criada (1 - Corrente, 2 - Poupança, 3 - Renda Fixa, 4 - Investimento):");
                     int tipoConta = scanner.nextInt();
 
                     if (tipoConta == 1) {
