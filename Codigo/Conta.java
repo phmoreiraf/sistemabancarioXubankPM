@@ -13,26 +13,13 @@ public abstract class Conta implements ContaInterface {
         this.saldo = 0.0;
         this.extrato = new ArrayList<>();
     }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public List<String> getExtrato() {
-        return extrato;
-    }
-
-    @Override
-    public double getSaldo() {
-        return saldo;
-    }
-
+    
     @Override
     public void depositar(double valor) {
         saldo += valor;
         registrarTransacao("Depósito: +" + valor);
     }
-
+    
     @Override
     public void sacar(double valor) {
         if (saldo >= valor) {
@@ -42,11 +29,29 @@ public abstract class Conta implements ContaInterface {
             System.out.println("Saldo insuficiente!");
         }
     }
-
+    
     @Override
     public void registrarTransacao(String transacao) {
         extrato.add(transacao);
     }
-
+    
     public abstract void atualizarSaldo();
+    
+    public Cliente getCliente() {
+        return cliente;
+    }
+    
+    public List<String> getExtrato() {
+        return extrato;
+    }
+    
+    @Override
+    public double getSaldo() {
+        return saldo;
+    }
+
+    @Override
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 }

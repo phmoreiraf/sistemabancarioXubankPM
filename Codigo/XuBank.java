@@ -1,7 +1,6 @@
 package Codigo;
 
 import java.util.Scanner;
-import java.util.List;
 
 public class XuBank {
     public static void main(String[] args) {
@@ -41,13 +40,13 @@ public class XuBank {
 
                     switch (tipoCliente) {
                         case 1:
-                            cliente = new Regular(nome, cpf, senha, "Regular");
+                            cliente = new ClienteRegular(nome, cpf, senha, TipoConta.REGULAR);
                             break;
                         case 2:
-                            cliente = new Gold(nome, cpf, senha, "Gold");
+                            cliente = new ClienteGold(nome, cpf, senha, TipoConta.GOLD);
                             break;
                         case 3:
-                            cliente = new VIP(nome, cpf, senha, "VIP");
+                            cliente = new ClienteVIP(nome, cpf, senha, TipoConta.VIP);
                             break;
                         default:
                             System.out.println("Tipo de cliente inválido!");
@@ -130,7 +129,6 @@ public class XuBank {
                                     scanner.nextLine(); // Consumir a quebra de linha
                                     cliente.sacar(valorSaque, indiceContaSaque);
                                     break;
-
                                 case 4:
                                     // Transferência
                                     System.out.println("Digite o valor a ser transferido:");
@@ -174,8 +172,25 @@ public class XuBank {
                                     }
                                     break;
                                 case 0:
-                                    cliente = null; // Sair da conta do cliente
+                                    clienteLogado = false; // Sair da conta do cliente
                                     break;
                                 default:
                                     System.out.println("Opção inválida!");
-                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("Nenhum cliente logado. Crie um cliente primeiro.");
+                    }
+                    break;
+                case 0:
+                    sair = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }
+
+        scanner.close();
+    }
+}

@@ -6,4 +6,5 @@ public interface ContaInterface {
     void registrarTransacao(String transacao);
     void atualizarSaldo();
     double getSaldo();
+    void setSaldo(double saldo);
 }

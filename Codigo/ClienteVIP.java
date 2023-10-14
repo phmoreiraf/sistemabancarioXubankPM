@@ -1,9 +1,9 @@
 package Codigo;
 
-public class ClienteGold extends Cliente {
+public class ClienteVIP extends Cliente {
     private int pontosFidelidade;
 
-    public ClienteGold(String nome, String cpf, String senha, TipoConta tipo) {
+    public ClienteVIP(String nome, String cpf, String senha, TipoConta tipo) {
         super(nome, cpf, senha, tipo);
         this.pontosFidelidade = 0;
     }

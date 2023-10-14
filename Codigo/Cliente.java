@@ -1,17 +1,16 @@
 package Codigo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Cliente {
+public abstract class Cliente {
     private String nome;
     private String cpf;
     private String senha;
-    private String tipo;
-    private List<Conta> contas;
+    private TipoConta tipo;
     private int pontosFidelidade;
+    private List<Conta> contas;
 
-    public Cliente(String nome, String cpf, String senha, String tipo) {
+    public Cliente(String nome, String cpf, String senha, TipoConta tipo) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
@@ -28,7 +27,7 @@ public class Cliente {
         return cpf;
     }
 
-    public String getTipo() {
+    public TipoConta getTipo() {
         return tipo;
     }
 
@@ -68,7 +67,7 @@ public class Cliente {
 
     public void transferir(double valor, int indiceContaOrigem, int indiceContaDestino) {
         if (indiceContaOrigem >= 0 && indiceContaOrigem < contas.size() &&
-                indiceContaDestino >= 0 && indiceContaDestino < contas.size()) {
+            indiceContaDestino >= 0 && indiceContaDestino < contas.size()) {
             Conta contaOrigem = contas.get(indiceContaOrigem);
             Conta contaDestino = contas.get(indiceContaDestino);
             if (contaOrigem.getSaldo() >= valor) {
@@ -86,9 +85,9 @@ public class Cliente {
     public void atualizarPontosFidelidade() {
         for (Conta conta : contas) {
             double saldo = conta.getSaldo();
-            if ("Gold".equals(tipo) && saldo >= 1000) {
+            if (tipo == TipoConta.GOLD && saldo >= 1000) {
                 pontosFidelidade += 10;
-            } else if ("VIP".equals(tipo) && saldo >= 2000) {
+            } else if (tipo == TipoConta.VIP && saldo >= 2000) {
                 pontosFidelidade += 30;
             }
         }
