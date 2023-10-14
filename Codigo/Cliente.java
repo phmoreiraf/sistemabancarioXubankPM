@@ -1,13 +1,15 @@
 package Codigo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Cliente {
+public class Cliente {
     private String nome;
     private String cpf;
     private String senha;
     private String tipo;
     private List<Conta> contas;
+    private int pontosFidelidade;
 
     public Cliente(String nome, String cpf, String senha, String tipo) {
         this.nome = nome;
@@ -15,26 +17,7 @@ public abstract class Cliente {
         this.senha = senha;
         this.tipo = tipo;
         this.contas = new ArrayList<>();
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setContas(List<Conta> contas) {
-        this.contas = contas;
+        this.pontosFidelidade = 0;
     }
 
     public String getNome() {
@@ -45,12 +28,12 @@ public abstract class Cliente {
         return cpf;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
     public String getTipo() {
         return tipo;
+    }
+
+    public int getPontosFidelidade() {
+        return pontosFidelidade;
     }
 
     public List<Conta> getContas() {
@@ -58,7 +41,7 @@ public abstract class Cliente {
     }
 
     public void adicionarConta(Conta conta) {
-        this.contas.add(conta);
+        contas.add(conta);
     }
 
     public void consultarSaldo() {
@@ -98,28 +81,29 @@ public abstract class Cliente {
             System.out.println("Índice de conta inválido!");
         }
     }
-}
 
-class ClienteReal extends Cliente {
-    public ClienteReal(String nome, String cpf, String senha, String tipo) {
-        super(nome, cpf, senha, tipo);
+    // Método para atualizar os pontos de fidelidade com base no tipo de cliente e saldo total
+    public void atualizarPontosFidelidade() {
+        for (Conta conta : contas) {
+            double saldo = conta.getSaldo();
+            if ("Gold".equals(tipo) && saldo >= 1000) {
+                pontosFidelidade += 10;
+            } else if ("VIP".equals(tipo) && saldo >= 2000) {
+                pontosFidelidade += 30;
+            }
+        }
     }
-}
 
-class Regular extends Cliente {
-    public Regular(String nome, String cpf, String senha, String tipo) {
-        super(nome, cpf, senha, tipo);
-    }
-}
-
-class Gold extends Cliente {
-    public Gold(String nome, String cpf, String senha, String tipo) {
-        super(nome, cpf, senha, tipo);
-    }
-}
-
-class VIP extends Cliente {
-    public VIP(String nome, String cpf, String senha, String tipo) {
-        super(nome, cpf, senha, tipo);
+    // Método para trocar pontos de fidelidade por recompensas
+    public void trocarPontosPorRecompensas() {
+        int pontosNecessarios = 100; // Exemplo de pontos necessários para trocar por uma recompensa
+        if (pontosFidelidade >= pontosNecessarios) {
+            // Lógica para oferecer recompensas
+            // Reduza os pontos de fidelidade após a troca
+            pontosFidelidade -= pontosNecessarios;
+            System.out.println("Recompensa concedida!");
+        } else {
+            System.out.println("Pontos de fidelidade insuficientes para trocar por recompensas.");
+        }
     }
 }
