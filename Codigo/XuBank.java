@@ -130,6 +130,7 @@ public class XuBank {
                                     scanner.nextLine(); // Consumir a quebra de linha
                                     cliente.sacar(valorSaque, indiceContaSaque);
                                     break;
+
                                 case 4:
                                     // Transferência
                                     System.out.println("Digite o valor a ser transferido:");
@@ -139,4 +140,42 @@ public class XuBank {
                                     int indiceContaOrigem = scanner.nextInt();
                                     scanner.nextLine(); // Consumir a quebra de linha
                                     System.out.println("Digite o índice da conta de destino para transferência:");
-                                    int indiceContaDestino
+                                    int indiceContaDestino = scanner.nextInt();
+                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    cliente.transferir(valorTransferencia, indiceContaOrigem, indiceContaDestino);
+                                    break;
+                                case 5:
+                                    // Consulta de saldo
+                                    cliente.consultarSaldo();
+                                    break;
+                                case 6:
+                                    // Atualização de saldo
+                                    for (Conta conta : cliente.getContas()) {
+                                        conta.atualizarSaldo();
+                                    }
+                                    break;
+                                case 7:
+                                    // Trocar pontos de fidelidade por recompensas
+                                    System.out.println("Digite a quantidade de pontos que deseja usar:");
+                                    int pontos = scanner.nextInt();
+                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    if (cliente instanceof ClienteGold) {
+                                        int pontosFidelidade = ((ClienteGold) cliente).getPontosFidelidade();
+                                        if (pontosFidelidade >= pontos) {
+                                            // Implemente a lógica de troca de pontos por recompensas aqui
+                                            // Atualize os pontos de fidelidade do cliente
+                                            ((ClienteGold) cliente).setPontosFidelidade(pontosFidelidade - pontos);
+                                            System.out.println("Recompensa obtida com sucesso!");
+                                        } else {
+                                            System.out.println("Pontos de fidelidade insuficientes!");
+                                        }
+                                    } else {
+                                        System.out.println("Essa funcionalidade é exclusiva para clientes Gold.");
+                                    }
+                                    break;
+                                case 0:
+                                    cliente = null; // Sair da conta do cliente
+                                    break;
+                                default:
+                                    System.out.println("Opção inválida!");
+                                }
