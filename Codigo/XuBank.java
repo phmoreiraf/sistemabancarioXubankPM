@@ -1,6 +1,17 @@
 package Codigo;
 
 import java.util.Scanner;
+<<<<<<< HEAD
+=======
+import java.util.List;
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
+>>>>>>> parent of 363e7f4 (refatoração do código)
+>>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
 
 public class XuBank {
     public static void main(String[] args) {
@@ -40,13 +51,51 @@ public class XuBank {
 
                     switch (tipoCliente) {
                         case 1:
+<<<<<<< HEAD
                             cliente = new ClienteRegular(nome, cpf, senha, TipoConta.REGULAR);
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            cliente = new ClienteRegular(nome, cpf, TipoConta.REGULAR);
+>>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
                             break;
                         case 2:
                             cliente = new ClienteGold(nome, cpf, senha, TipoConta.GOLD);
                             break;
                         case 3:
+<<<<<<< HEAD
                             cliente = new ClienteVIP(nome, cpf, senha, TipoConta.VIP);
+=======
+                            cliente = new ClienteVIP(nome, cpf, TipoConta.VIP);
+=======
+                            cliente = new Regular(nome, cpf, senha, "Regular");
+                            break;
+                        case 2:
+                            cliente = new Gold(nome, cpf, senha, "Gold");
+                            break;
+                        case 3:
+                            cliente = new VIP(nome, cpf, senha, "VIP");
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
+                            cliente = new Regular(nome, cpf, senha, "Regular");
+                            break;
+                        case 2:
+                            cliente = new Gold(nome, cpf, senha, "Gold");
+                            break;
+                        case 3:
+                            cliente = new VIP(nome, cpf, senha, "VIP");
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
+                            cliente = new Regular(nome, cpf, senha, "Regular");
+                            break;
+                        case 2:
+                            cliente = new Gold(nome, cpf, senha, "Gold");
+                            break;
+                        case 3:
+                            cliente = new VIP(nome, cpf, senha, "VIP");
+>>>>>>> parent of 363e7f4 (refatoração do código)
+>>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
                             break;
                         default:
                             System.out.println("Tipo de cliente inválido!");
@@ -176,6 +225,12 @@ public class XuBank {
                                     break;
                                 default:
                                     System.out.println("Opção inválida!");
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
                             }
                         }
                     } else {
@@ -194,3 +249,15 @@ public class XuBank {
         scanner.close();
     }
 }
+<<<<<<< HEAD
+=======
+=======
+                                }
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
+                                }
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
+                                }
+>>>>>>> parent of 363e7f4 (refatoração do código)
+>>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
