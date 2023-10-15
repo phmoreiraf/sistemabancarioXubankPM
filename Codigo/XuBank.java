@@ -2,55 +2,18 @@ package Codigo;
 
 import java.util.Scanner;
 
+import Codigo.Cliente.ClienteGold;
+import Codigo.Cliente.ClienteRegular;
+import Codigo.Cliente.ClienteVIP;
+import Codigo.Conta.ContaCorrente;
+import Codigo.Conta.Investimento;
+import Codigo.Conta.Poupanca;
+import Codigo.Conta.RendaFixa;
+
 public class XuBank {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-<<<<<<< Updated upstream
         Cliente cliente = null;
-=======
-
-        Conta contaCorrente;
-        Cliente cliente;
-
-        // Criação de um cliente
-        System.out.println("Digite o nome do cliente:");
-        String nome = scanner.nextLine();
-
-        System.out.println("Digite o CPF do cliente:");
-        String cpf = scanner.nextLine();
-
-        System.out.println("Digite a senha do cliente:");
-        String senha = scanner.nextLine();
-
-        System.out.println("Escolha o tipo de cliente:");
-        System.out.println("1. Regular");
-        System.out.println("2. Gold");
-        System.out.println("3. VIP");
-
-        int tipoCliente = scanner.nextInt();
-
-        switch (tipoCliente) {
-            case 1:
-                String regular = "Conta regular";
-                cliente = new Regular(nome, cpf, senha, regular);
-                break;
-            case 2:
-                String gold = "Conta gold";
-                cliente = new Gold(nome, cpf, senha, gold);
-                break;
-            case 3:
-                String vip = "Conta vip";
-                cliente = new VIP(nome, cpf, senha, vip);
-                break;
-            default:
-                System.out.println("Tipo de cliente inválido!");
-                scanner.close();
-                return;
-        }
-
-        contaCorrente = new ContaCorrente(cliente);
->>>>>>> Stashed changes
-
         boolean sair = false;
 
         while (!sair) {
@@ -98,7 +61,6 @@ public class XuBank {
                     }
                     break;
                 case 2:
-<<<<<<< Updated upstream
                     // Acesso à conta de cliente existente
                     if (cliente != null) {
                         System.out.println("Bem-vindo, " + cliente.getNome() + " (" + cliente.getCpf() + ")");
@@ -225,44 +187,6 @@ public class XuBank {
                         }
                     } else {
                         System.out.println("Nenhum cliente logado. Crie um cliente primeiro.");
-=======
-                    // Depósito
-                    System.out.println("Digite o valor a ser depositado:");
-                    double valorDeposito = scanner.nextDouble();
-                    System.out.println("Digite o índice da conta para depósito:");
-                    int indiceContaDeposito = scanner.nextInt();
-                    cliente.depositar(valorDeposito, indiceContaDeposito);
-                    break;
-                case 3:
-                    // Saque
-                    System.out.println("Digite o valor a ser sacado:");
-                    double valorSaque = scanner.nextDouble();
-                    System.out.println("Digite o índice da conta para saque:");
-                    int indiceContaSaque = scanner.nextInt();
-                    cliente.sacar(valorSaque, indiceContaSaque);
-                    break;
-                case 4:
-                    // Transferência
-                    System.out.println("Digite o valor a ser transferido:");
-                    double valorTransferencia = scanner.nextDouble();
-                    System.out.println("Digite o índice da conta de origem para transferência:");
-                    int indiceContaOrigem = scanner.nextInt();
-                    System.out.println("Digite o índice da conta de destino para transferência:");
-                    int indiceContaDestino = scanner.nextInt();
-                    cliente.transferir(valorTransferencia, indiceContaOrigem, indiceContaDestino);
-                    break;
-                case 5:
-                    // Consulta de saldo
-                    cliente.consultarSaldo();
-                    break;
-                case 6:
-                    // Atualização de saldo
-                    for (Conta conta : cliente.getContas()) {
-                        if (conta instanceof Investimento) {
-                            ((Investimento) conta).renderRendimentoDiario();
-                        }
-                        conta.atualizarSaldo();
->>>>>>> Stashed changes
                     }
                     System.out.println("Saldo atualizado com sucesso.");
                     break;
