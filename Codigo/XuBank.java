@@ -15,7 +15,7 @@ public class XuBank {
         Scanner scanner = new Scanner(System.in);
         Cliente cliente = null;
         boolean sair = false;
-        
+
         // Conta.RendaFixa = null;
 
         while (!sair) {
@@ -104,11 +104,12 @@ public class XuBank {
                                             System.out.println("Conta poupança criada com sucesso!");
                                             break;
                                         case 3:
-                                        
+
                                             System.out.println(
                                                     "Digite a taxa de rendimento contratada para a conta de renda fixa:");
                                             double taxaRendimento = scanner.nextDouble();
-                                            //MinhaContaRendaFixa contaRendaFixa = new MinhaContaRendaFixa(cliente, taxaRendimento);
+                                            // MinhaContaRendaFixa contaRendaFixa = new MinhaContaRendaFixa(cliente,
+                                            // taxaRendimento);
                                             scanner.nextLine(); // Consumir a quebra de linha
                                             cliente.adicionarConta(new RendaFixa(cliente, taxaRendimento));
                                             System.out.println("Conta de renda fixa criada com sucesso!");
