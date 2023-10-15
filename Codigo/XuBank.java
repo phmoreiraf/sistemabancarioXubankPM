@@ -1,30 +1,13 @@
 package Codigo;
 
-<<<<<<< HEAD
-import java.util.*;
-
-import Codigo.Cliente.ClienteGold;
-import Codigo.Cliente.ClienteRegular;
-import Codigo.Cliente.ClienteVIP;
-import Codigo.Conta.ContaCorrente;
-import Codigo.Conta.Investimento;
-import Codigo.Conta.Poupanca;
-import Codigo.Conta.RendaFixa;
-=======
 import java.util.Scanner;
-import java.util.List;
-<<<<<<< HEAD
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
->>>>>>> parent of 363e7f4 (refatoração do código)
 
 public class XuBank {
-    public static Cliente cliente;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-         // Crie uma instância da classe Cliente
+        Cliente cliente = null;
+
         boolean sair = false;
-        // Conta.RendaFixa = null;
 
         while (!sair) {
             System.out.println("Escolha uma opção:");
@@ -44,6 +27,9 @@ public class XuBank {
                     System.out.println("Digite o CPF do cliente:");
                     String cpf = scanner.nextLine();
 
+                    System.out.println("Digite a senha do cliente:");
+                    String senha = scanner.nextLine();
+
                     System.out.println("Escolha o tipo de cliente:");
                     System.out.println("1. Regular");
                     System.out.println("2. Gold");
@@ -54,33 +40,13 @@ public class XuBank {
 
                     switch (tipoCliente) {
                         case 1:
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            cliente = new ClienteRegular(nome, cpf, TipoConta.REGULAR);
+                            cliente = new ClienteRegular(nome, cpf, senha, TipoConta.REGULAR);
                             break;
                         case 2:
-                            cliente = new ClienteGold(nome, cpf, TipoConta.GOLD);
+                            cliente = new ClienteGold(nome, cpf, senha, TipoConta.GOLD);
                             break;
                         case 3:
-                            cliente = new ClienteVIP(nome, cpf, TipoConta.VIP);
-=======
-                            cliente = new Regular(nome, cpf, senha, "Regular");
-                            break;
-                        case 2:
-                            cliente = new Gold(nome, cpf, senha, "Gold");
-                            break;
-                        case 3:
-                            cliente = new VIP(nome, cpf, senha, "VIP");
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-                            cliente = new Regular(nome, cpf, senha, "Regular");
-                            break;
-                        case 2:
-                            cliente = new Gold(nome, cpf, senha, "Gold");
-                            break;
-                        case 3:
-                            cliente = new VIP(nome, cpf, senha, "VIP");
->>>>>>> parent of 363e7f4 (refatoração do código)
+                            cliente = new ClienteVIP(nome, cpf, senha, TipoConta.VIP);
                             break;
                         default:
                             System.out.println("Tipo de cliente inválido!");
@@ -129,14 +95,10 @@ public class XuBank {
                                             System.out.println("Conta poupança criada com sucesso!");
                                             break;
                                         case 3:
-
-                                            System.out.println(
-                                                    "Digite a taxa de rendimento contratada para a conta de renda fixa:");
-                                            double taxaRendimento = scanner.nextDouble();
-                                            // MinhaContaRendaFixa contaRendaFixa = new MinhaContaRendaFixa(cliente,
-                                            // taxaRendimento);
+                                            System.out.println("Digite o rendimento contratado para a conta de renda fixa:");
+                                            double rendimentoContratado = scanner.nextDouble();
                                             scanner.nextLine(); // Consumir a quebra de linha
-                                            cliente.adicionarConta(new RendaFixa(cliente, taxaRendimento));
+                                            cliente.adicionarConta(new RendaFixa(cliente, rendimentoContratado));
                                             System.out.println("Conta de renda fixa criada com sucesso!");
                                             break;
                                         case 4:
@@ -167,7 +129,6 @@ public class XuBank {
                                     scanner.nextLine(); // Consumir a quebra de linha
                                     cliente.sacar(valorSaque, indiceContaSaque);
                                     break;
-
                                 case 4:
                                     // Transferência
                                     System.out.println("Digite o valor a ser transferido:");
@@ -190,22 +151,19 @@ public class XuBank {
                                     for (Conta conta : cliente.getContas()) {
                                         conta.atualizarSaldo();
                                     }
-                                    System.out.println("Saldo atualizado com sucesso.");
                                     break;
                                 case 7:
-                                    // Trocar pontos de fidelidade por recompensas (implementação real)
-                                    if (cliente instanceof Cliente.ClienteGold) {
-                                        int pontosFidelidade = ((Cliente.ClienteGold) cliente).getPontosFidelidade();
-                                        System.out.println("Seus pontos de fidelidade: " + pontosFidelidade);
-                                        System.out.println("Digite a quantidade de pontos que deseja usar:");
-                                        int pontos = scanner.nextInt();
-                                        scanner.nextLine(); // Consumir a quebra de linha
+                                    // Trocar pontos de fidelidade por recompensas
+                                    System.out.println("Digite a quantidade de pontos que deseja usar:");
+                                    int pontos = scanner.nextInt();
+                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    if (cliente instanceof ClienteGold) {
+                                        int pontosFidelidade = ((ClienteGold) cliente).getPontosFidelidade();
                                         if (pontosFidelidade >= pontos) {
                                             // Implemente a lógica de troca de pontos por recompensas aqui
-                                            // Exemplo simples: Deduzir pontos e conceder recompensa
-                                            ((Cliente.ClienteGold) cliente)
-                                                    .setPontosFidelidade(pontosFidelidade - pontos);
-                                            System.out.println("Recompensa concedida!");
+                                            // Atualize os pontos de fidelidade do cliente
+                                            ((ClienteGold) cliente).setPontosFidelidade(pontosFidelidade - pontos);
+                                            System.out.println("Recompensa obtida com sucesso!");
                                         } else {
                                             System.out.println("Pontos de fidelidade insuficientes!");
                                         }
@@ -214,12 +172,10 @@ public class XuBank {
                                     }
                                     break;
                                 case 0:
-                                    cliente = null; // Sair da conta do cliente
+                                    clienteLogado = false; // Sair da conta do cliente
                                     break;
                                 default:
                                     System.out.println("Opção inválida!");
-<<<<<<< HEAD
-<<<<<<< HEAD
                             }
                         }
                     } else {
@@ -238,9 +194,3 @@ public class XuBank {
         scanner.close();
     }
 }
-=======
-                                }
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-                                }
->>>>>>> parent of 363e7f4 (refatoração do código)

@@ -1,37 +1,19 @@
 package Codigo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Cliente {
+public abstract class Cliente {
     private String nome;
     private String cpf;
-<<<<<<< HEAD
-<<<<<<< HEAD
+    private String senha;
     private TipoConta tipo;
     private int pontosFidelidade;
-=======
-    private String senha;
-    private String tipo;
->>>>>>> parent of 363e7f4 (refatoração do código)
     private List<Conta> contas;
-    private int pontosFidelidade;
 
-<<<<<<< HEAD
-    public Cliente(String nome, String cpf, TipoConta tipo) {
-=======
-    public Cliente(String nome, String cpf, String senha, String tipo) {
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-    private String senha;
-    private String tipo;
-    private List<Conta> contas;
-    private int pontosFidelidade;
-
-    public Cliente(String nome, String cpf, String senha, String tipo) {
->>>>>>> parent of 363e7f4 (refatoração do código)
+    public Cliente(String nome, String cpf, String senha, TipoConta tipo) {
         this.nome = nome;
         this.cpf = cpf;
+        this.senha = senha;
         this.tipo = tipo;
         this.contas = new ArrayList<>();
         this.pontosFidelidade = 0;
@@ -45,7 +27,7 @@ public class Cliente {
         return cpf;
     }
 
-    public String getTipo() {
+    public TipoConta getTipo() {
         return tipo;
     }
 
@@ -85,7 +67,7 @@ public class Cliente {
 
     public void transferir(double valor, int indiceContaOrigem, int indiceContaDestino) {
         if (indiceContaOrigem >= 0 && indiceContaOrigem < contas.size() &&
-                indiceContaDestino >= 0 && indiceContaDestino < contas.size()) {
+            indiceContaDestino >= 0 && indiceContaDestino < contas.size()) {
             Conta contaOrigem = contas.get(indiceContaOrigem);
             Conta contaDestino = contas.get(indiceContaDestino);
             if (contaOrigem.getSaldo() >= valor) {
@@ -99,14 +81,13 @@ public class Cliente {
         }
     }
 
-    // Método para atualizar os pontos de fidelidade com base no tipo de cliente e
-    // saldo total
+    // Método para atualizar os pontos de fidelidade com base no tipo de cliente e saldo total
     public void atualizarPontosFidelidade() {
         for (Conta conta : contas) {
             double saldo = conta.getSaldo();
-            if ("Gold".equals(tipo) && saldo >= 1000) {
+            if (tipo == TipoConta.GOLD && saldo >= 1000) {
                 pontosFidelidade += 10;
-            } else if ("VIP".equals(tipo) && saldo >= 2000) {
+            } else if (tipo == TipoConta.VIP && saldo >= 2000) {
                 pontosFidelidade += 30;
             }
         }
@@ -124,55 +105,4 @@ public class Cliente {
             System.out.println("Pontos de fidelidade insuficientes para trocar por recompensas.");
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    // TIPOS CLIENTES
-
-    public class ClienteRegular extends Cliente {
-        public ClienteRegular(String nome, String cpf, TipoConta tipo) {
-            super(nome, cpf, tipo);
-        }
-    }
-
-    public class ClienteGold extends Cliente {
-        private int pontosFidelidade;
-
-        public ClienteGold(String nome, String cpf, TipoConta tipo) {
-            super(nome, cpf, tipo);
-            this.pontosFidelidade = 0;
-        }
-
-        public int getPontosFidelidade() {
-            return pontosFidelidade;
-        }
-
-        public void setPontosFidelidade(int pontosFidelidade) {
-            this.pontosFidelidade = pontosFidelidade;
-        }
-    }
-
-    public class ClienteVIP extends Cliente {
-        private int pontosFidelidade;
-
-        public ClienteVIP(String nome, String cpf, TipoConta tipo) {
-            super(nome, cpf, tipo);
-            this.pontosFidelidade = 0;
-        }
-
-        public int getPontosFidelidade() {
-            return pontosFidelidade;
-        }
-
-        public void setPontosFidelidade(int pontosFidelidade) {
-            this.pontosFidelidade = pontosFidelidade;
-        }
-    }
-
 }
-=======
-}
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-}
->>>>>>> parent of 363e7f4 (refatoração do código)
