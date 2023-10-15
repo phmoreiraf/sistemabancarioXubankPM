@@ -97,7 +97,7 @@ public abstract class Conta implements ContaInterface {
         }
     }
 
-    class Investimento extends Conta {
+ public class Investimento extends Conta {
 
         private static final double TAXA_IMPOSTO = 0.15;
 
@@ -131,7 +131,7 @@ public abstract class Conta implements ContaInterface {
         }
     }
 
-    class Poupanca extends Conta {
+  public class Poupanca extends Conta {
 
         private static final double RENDIMENTO_MENSAL = 0.005; // 0.5% ao mês
 
@@ -151,7 +151,6 @@ public abstract class Conta implements ContaInterface {
     }
 
     public abstract class RendaFixa extends Conta {
-
         private double taxaRendimento;
         private static final double IMPOSTO_SAQUE = 0.15;
 
@@ -162,7 +161,6 @@ public abstract class Conta implements ContaInterface {
 
         @Override
         public void atualizarSaldo() {
-            // Implementação do cálculo do saldo com rendimento mensal
             double saldoAnterior = getSaldo();
             double rendimento = saldoAnterior * taxaRendimento;
             double novoSaldo = saldoAnterior + rendimento;
@@ -183,4 +181,44 @@ public abstract class Conta implements ContaInterface {
             }
         }
     }
+
+    public class ContaRendaFixa extends RendaFixa {
+        public ContaRendaFixa(Cliente cliente, double taxaRendimento) {
+            super(cliente, taxaRendimento);
+        }
+    }
+
+    // public abstract class RendaFixa extends Conta {
+
+    //     private double taxaRendimento;
+    //     private static final double IMPOSTO_SAQUE = 0.15;
+
+    //     public RendaFixa(Cliente cliente, double taxaRendimento) {
+    //         super(cliente);
+    //         this.taxaRendimento = taxaRendimento;
+    //     }
+
+    //     @Override
+    //     public void atualizarSaldo() {
+    //         // Implementação do cálculo do saldo com rendimento mensal
+    //         double saldoAnterior = getSaldo();
+    //         double rendimento = saldoAnterior * taxaRendimento;
+    //         double novoSaldo = saldoAnterior + rendimento;
+    //         setSaldo(novoSaldo);
+    //         registrarTransacao("Rendimento mensal: +" + rendimento);
+    //     }
+
+    //     @Override
+    //     public void sacar(double valor) {
+    //         double saldoAnterior = getSaldo();
+    //         if (valor > saldoAnterior) {
+    //             System.out.println("Saldo insuficiente para saque!");
+    //         } else {
+    //             double imposto = valor * IMPOSTO_SAQUE;
+    //             double novoSaldo = saldoAnterior - valor - imposto;
+    //             setSaldo(novoSaldo);
+    //             registrarTransacao("Saque: -" + valor + ", Imposto: -" + imposto);
+    //         }
+    //     }
+    // }
 }

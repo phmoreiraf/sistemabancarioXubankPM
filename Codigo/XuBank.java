@@ -1,6 +1,6 @@
 package Codigo;
 
-import java.util.Scanner;
+import java.util.*;
 
 import Codigo.Cliente.ClienteGold;
 import Codigo.Cliente.ClienteRegular;
@@ -15,6 +15,7 @@ public class XuBank {
         Scanner scanner = new Scanner(System.in);
         Cliente cliente = null;
         boolean sair = false;
+        //Conta.RendaFixa = null;
 
         while (!sair) {
             System.out.println("Escolha uma opção:");
@@ -102,10 +103,10 @@ public class XuBank {
                                             System.out.println("Conta poupança criada com sucesso!");
                                             break;
                                         case 3:
-                                            System.out.println("Digite o rendimento contratado para a conta de renda fixa:");
-                                            double rendimentoContratado = scanner.nextDouble();
+                                            System.out.println("Digite a taxa de rendimento contratada para a conta de renda fixa:");
+                                            double taxaRendimento = scanner.nextDouble();
                                             scanner.nextLine(); // Consumir a quebra de linha
-                                            cliente.adicionarConta(new RendaFixa(cliente, rendimentoContratado));
+                                            cliente.adicionarConta(new RendaFixa(cliente, taxaRendimento));
                                             System.out.println("Conta de renda fixa criada com sucesso!");
                                             break;
                                         case 4:
@@ -158,19 +159,21 @@ public class XuBank {
                                     for (Conta conta : cliente.getContas()) {
                                         conta.atualizarSaldo();
                                     }
+                                    System.out.println("Saldo atualizado com sucesso.");
                                     break;
                                 case 7:
-                                    // Trocar pontos de fidelidade por recompensas
-                                    System.out.println("Digite a quantidade de pontos que deseja usar:");
-                                    int pontos = scanner.nextInt();
-                                    scanner.nextLine(); // Consumir a quebra de linha
-                                    if (cliente instanceof ClienteGold) {
-                                        int pontosFidelidade = ((ClienteGold) cliente).getPontosFidelidade();
+                                    // Trocar pontos de fidelidade por recompensas (implementação real)
+                                    if (cliente instanceof Cliente.ClienteGold) {
+                                        int pontosFidelidade = ((Cliente.ClienteGold) cliente).getPontosFidelidade();
+                                        System.out.println("Seus pontos de fidelidade: " + pontosFidelidade);
+                                        System.out.println("Digite a quantidade de pontos que deseja usar:");
+                                        int pontos = scanner.nextInt();
+                                        scanner.nextLine(); // Consumir a quebra de linha
                                         if (pontosFidelidade >= pontos) {
                                             // Implemente a lógica de troca de pontos por recompensas aqui
-                                            // Atualize os pontos de fidelidade do cliente
-                                            ((ClienteGold) cliente).setPontosFidelidade(pontosFidelidade - pontos);
-                                            System.out.println("Recompensa obtida com sucesso!");
+                                            // Exemplo simples: Deduzir pontos e conceder recompensa
+                                            ((Cliente.ClienteGold) cliente).setPontosFidelidade(pontosFidelidade - pontos);
+                                            System.out.println("Recompensa concedida!");
                                         } else {
                                             System.out.println("Pontos de fidelidade insuficientes!");
                                         }
@@ -188,9 +191,7 @@ public class XuBank {
                     } else {
                         System.out.println("Nenhum cliente logado. Crie um cliente primeiro.");
                     }
-                    System.out.println("Saldo atualizado com sucesso.");
                     break;
-
                 case 0:
                     sair = true;
                     break;

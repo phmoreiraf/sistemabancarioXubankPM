@@ -49,7 +49,7 @@ public abstract class Cliente {
 
     // TIPOS CLIENTES
 
-    class ClienteGold extends Cliente {
+    public class ClienteGold extends Cliente {
         private int pontosFidelidade;
 
         public ClienteGold(String nome, String cpf, String senha, TipoConta tipo) {
@@ -66,7 +66,7 @@ public abstract class Cliente {
         }
     }
 
-    class ClienteRegular extends Cliente {
+    public class ClienteRegular extends Cliente {
         public ClienteRegular(String nome, String cpf, String senha, TipoConta tipo) {
             super(nome, cpf, senha, tipo);
         }
@@ -146,4 +146,5 @@ public abstract class Cliente {
             System.out.println("Pontos de fidelidade insuficientes para trocar por recompensas.");
         }
     }
+
 }
