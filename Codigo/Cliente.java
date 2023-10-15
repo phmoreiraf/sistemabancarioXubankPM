@@ -47,48 +47,6 @@ public abstract class Cliente {
         }
     }
 
-    // TIPOS CLIENTES
-
-    public class ClienteGold extends Cliente {
-        private int pontosFidelidade;
-
-        public ClienteGold(String nome, String cpf, String senha, TipoConta tipo) {
-            super(nome, cpf, senha, tipo);
-            this.pontosFidelidade = 0;
-        }
-
-        public int getPontosFidelidade() {
-            return pontosFidelidade;
-        }
-
-        public void setPontosFidelidade(int pontosFidelidade) {
-            this.pontosFidelidade = pontosFidelidade;
-        }
-    }
-
-    public class ClienteRegular extends Cliente {
-        public ClienteRegular(String nome, String cpf, String senha, TipoConta tipo) {
-            super(nome, cpf, senha, tipo);
-        }
-    }
-
-    class ClienteVIP extends Cliente {
-        private int pontosFidelidade;
-
-        public ClienteVIP(String nome, String cpf, String senha, TipoConta tipo) {
-            super(nome, cpf, senha, tipo);
-            this.pontosFidelidade = 0;
-        }
-
-        public int getPontosFidelidade() {
-            return pontosFidelidade;
-        }
-
-        public void setPontosFidelidade(int pontosFidelidade) {
-            this.pontosFidelidade = pontosFidelidade;
-        }
-    }
-
     public void depositar(double valor, int indiceConta) {
         if (indiceConta >= 0 && indiceConta < contas.size()) {
             contas.get(indiceConta).depositar(valor);
@@ -144,6 +102,48 @@ public abstract class Cliente {
             System.out.println("Recompensa concedida!");
         } else {
             System.out.println("Pontos de fidelidade insuficientes para trocar por recompensas.");
+        }
+    }
+
+    // TIPOS CLIENTES
+
+    public class ClienteRegular extends Cliente {
+        public ClienteRegular(String nome, String cpf, String senha, TipoConta tipo) {
+            super(nome, cpf, senha, tipo);
+        }
+    }
+
+    public class ClienteGold extends Cliente {
+        private int pontosFidelidade;
+
+        public ClienteGold(String nome, String cpf, String senha, TipoConta tipo) {
+            super(nome, cpf, senha, tipo);
+            this.pontosFidelidade = 0;
+        }
+
+        public int getPontosFidelidade() {
+            return pontosFidelidade;
+        }
+
+        public void setPontosFidelidade(int pontosFidelidade) {
+            this.pontosFidelidade = pontosFidelidade;
+        }
+    }
+
+    public class ClienteVIP extends Cliente {
+        private int pontosFidelidade;
+
+        public ClienteVIP(String nome, String cpf, String senha, TipoConta tipo) {
+            super(nome, cpf, senha, tipo);
+            this.pontosFidelidade = 0;
+        }
+
+        public int getPontosFidelidade() {
+            return pontosFidelidade;
+        }
+
+        public void setPontosFidelidade(int pontosFidelidade) {
+            this.pontosFidelidade = pontosFidelidade;
         }
     }
 

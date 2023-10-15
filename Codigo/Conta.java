@@ -97,7 +97,7 @@ public abstract class Conta implements ContaInterface {
         }
     }
 
- public class Investimento extends Conta {
+ class Investimento extends Conta {
 
         private static final double TAXA_IMPOSTO = 0.15;
 
@@ -131,17 +131,16 @@ public abstract class Conta implements ContaInterface {
         }
     }
 
-  public class Poupanca extends Conta {
+    class Poupanca extends Conta {
 
-        private static final double RENDIMENTO_MENSAL = 0.005; // 0.5% ao mês
-
+        private static final double RENDIMENTO_MENSAL = 0.005;
+    
         public Poupanca(Cliente cliente) {
             super(cliente);
         }
-
+    
         @Override
         public void atualizarSaldo() {
-            // Implementação do cálculo do saldo com rendimento mensal
             double saldoAnterior = getSaldo();
             double rendimento = saldoAnterior * RENDIMENTO_MENSAL;
             double novoSaldo = saldoAnterior + rendimento;
@@ -150,15 +149,16 @@ public abstract class Conta implements ContaInterface {
         }
     }
 
-    public abstract class RendaFixa extends Conta {
+    class RendaFixa extends Conta {
+
         private double taxaRendimento;
         private static final double IMPOSTO_SAQUE = 0.15;
-
+    
         public RendaFixa(Cliente cliente, double taxaRendimento) {
             super(cliente);
             this.taxaRendimento = taxaRendimento;
         }
-
+    
         @Override
         public void atualizarSaldo() {
             double saldoAnterior = getSaldo();
@@ -167,7 +167,7 @@ public abstract class Conta implements ContaInterface {
             setSaldo(novoSaldo);
             registrarTransacao("Rendimento mensal: +" + rendimento);
         }
-
+    
         @Override
         public void sacar(double valor) {
             double saldoAnterior = getSaldo();
@@ -179,12 +179,6 @@ public abstract class Conta implements ContaInterface {
                 setSaldo(novoSaldo);
                 registrarTransacao("Saque: -" + valor + ", Imposto: -" + imposto);
             }
-        }
-    }
-
-    public class ContaRendaFixa extends RendaFixa {
-        public ContaRendaFixa(Cliente cliente, double taxaRendimento) {
-            super(cliente, taxaRendimento);
         }
     }
 
