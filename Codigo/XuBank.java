@@ -36,9 +36,6 @@ public class XuBank {
                     System.out.println("Digite o CPF do cliente:");
                     String cpf = scanner.nextLine();
 
-                    System.out.println("Digite a senha do cliente:");
-                    String senha = scanner.nextLine();
-
                     System.out.println("Escolha o tipo de cliente:");
                     System.out.println("1. Regular");
                     System.out.println("2. Gold");
