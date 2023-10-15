@@ -36,7 +36,10 @@ public abstract class Conta implements ContaInterface {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 363e7f4 (refatoração do código)
     public Cliente getCliente() {
         return cliente;
     }
@@ -50,6 +53,9 @@ public abstract class Conta implements ContaInterface {
         return saldo;
     }
 
+<<<<<<< HEAD
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
 >>>>>>> parent of 363e7f4 (refatoração do código)
     @Override
     public void depositar(double valor) {
@@ -71,6 +77,7 @@ public abstract class Conta implements ContaInterface {
     public void registrarTransacao(String transacao) {
         extrato.add(transacao);
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     public abstract void atualizarSaldo();
@@ -232,6 +239,10 @@ public abstract class Conta implements ContaInterface {
     //         }
     //     }
     // }
+=======
+
+    public abstract void atualizarSaldo();
+>>>>>>> parent of 363e7f4 (refatoração do código)
 =======
 
     public abstract void atualizarSaldo();
