@@ -11,11 +11,11 @@ import Codigo.Conta.Poupanca;
 import Codigo.Conta.RendaFixa;
 
 public class XuBank {
+    public static Cliente cliente;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Cliente cliente = null;
+         // Crie uma instância da classe Cliente
         boolean sair = false;
-
         // Conta.RendaFixa = null;
 
         while (!sair) {
@@ -49,13 +49,13 @@ public class XuBank {
 
                     switch (tipoCliente) {
                         case 1:
-                            cliente = new ClienteRegular(nome, cpf, senha, TipoConta.REGULAR);
+                            cliente = new ClienteRegular(nome, cpf, TipoConta.REGULAR);
                             break;
                         case 2:
-                            cliente = new ClienteGold(nome, cpf, senha, TipoConta.GOLD);
+                            cliente = new ClienteGold(nome, cpf, TipoConta.GOLD);
                             break;
                         case 3:
-                            cliente = new ClienteVIP(nome, cpf, senha, TipoConta.VIP);
+                            cliente = new ClienteVIP(nome, cpf, TipoConta.VIP);
                             break;
                         default:
                             System.out.println("Tipo de cliente inválido!");

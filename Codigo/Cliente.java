@@ -9,7 +9,7 @@ public abstract class Cliente {
     private int pontosFidelidade;
     private List<Conta> contas;
 
-    public Cliente(String nome, String cpf, String senha, TipoConta tipo) {
+    public Cliente(String nome, String cpf, TipoConta tipo) {
         this.nome = nome;
         this.cpf = cpf;
         this.tipo = tipo;
@@ -108,16 +108,16 @@ public abstract class Cliente {
     // TIPOS CLIENTES
 
     public class ClienteRegular extends Cliente {
-        public ClienteRegular(String nome, String cpf, String senha, TipoConta tipo) {
-            super(nome, cpf, senha, tipo);
+        public ClienteRegular(String nome, String cpf, TipoConta tipo) {
+            super(nome, cpf, tipo);
         }
     }
 
     public class ClienteGold extends Cliente {
         private int pontosFidelidade;
 
-        public ClienteGold(String nome, String cpf, String senha, TipoConta tipo) {
-            super(nome, cpf, senha, tipo);
+        public ClienteGold(String nome, String cpf, TipoConta tipo) {
+            super(nome, cpf, tipo);
             this.pontosFidelidade = 0;
         }
 
@@ -133,8 +133,8 @@ public abstract class Cliente {
     public class ClienteVIP extends Cliente {
         private int pontosFidelidade;
 
-        public ClienteVIP(String nome, String cpf, String senha, TipoConta tipo) {
-            super(nome, cpf, senha, tipo);
+        public ClienteVIP(String nome, String cpf, TipoConta tipo) {
+            super(nome, cpf, tipo);
             this.pontosFidelidade = 0;
         }
 
