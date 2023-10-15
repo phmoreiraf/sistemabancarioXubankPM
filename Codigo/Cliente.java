@@ -5,42 +5,12 @@ import java.util.*;
 public abstract class Cliente {
     private String nome;
     private String cpf;
-<<<<<<< HEAD
     private String senha;
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
     private TipoConta tipo;
     private int pontosFidelidade;
     private List<Conta> contas;
 
-<<<<<<< HEAD
     public Cliente(String nome, String cpf, String senha, TipoConta tipo) {
-=======
-<<<<<<< HEAD
-    public Cliente(String nome, String cpf, TipoConta tipo) {
-=======
-    public Cliente(String nome, String cpf, String senha, String tipo) {
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-    private String senha;
-    private String tipo;
-    private List<Conta> contas;
-    private int pontosFidelidade;
-
-    public Cliente(String nome, String cpf, String senha, String tipo) {
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-    private String senha;
-    private String tipo;
-    private List<Conta> contas;
-    private int pontosFidelidade;
-
-    public Cliente(String nome, String cpf, String senha, String tipo) {
->>>>>>> parent of 363e7f4 (refatoração do código)
->>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
@@ -135,63 +105,4 @@ public abstract class Cliente {
             System.out.println("Pontos de fidelidade insuficientes para trocar por recompensas.");
         }
     }
-<<<<<<< HEAD
 }
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    // TIPOS CLIENTES
-
-    public class ClienteRegular extends Cliente {
-        public ClienteRegular(String nome, String cpf, TipoConta tipo) {
-            super(nome, cpf, tipo);
-        }
-    }
-
-    public class ClienteGold extends Cliente {
-        private int pontosFidelidade;
-
-        public ClienteGold(String nome, String cpf, TipoConta tipo) {
-            super(nome, cpf, tipo);
-            this.pontosFidelidade = 0;
-        }
-
-        public int getPontosFidelidade() {
-            return pontosFidelidade;
-        }
-
-        public void setPontosFidelidade(int pontosFidelidade) {
-            this.pontosFidelidade = pontosFidelidade;
-        }
-    }
-
-    public class ClienteVIP extends Cliente {
-        private int pontosFidelidade;
-
-        public ClienteVIP(String nome, String cpf, TipoConta tipo) {
-            super(nome, cpf, tipo);
-            this.pontosFidelidade = 0;
-        }
-
-        public int getPontosFidelidade() {
-            return pontosFidelidade;
-        }
-
-        public void setPontosFidelidade(int pontosFidelidade) {
-            this.pontosFidelidade = pontosFidelidade;
-        }
-    }
-
-}
-=======
-}
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-}
->>>>>>> parent of 363e7f4 (refatoração do código)
-=======
-}
->>>>>>> parent of 363e7f4 (refatoração do código)
->>>>>>> 4e59634897f01aa4fcdc2019f1bf54dbd18a468a
