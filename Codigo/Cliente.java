@@ -8,6 +8,7 @@ public class Cliente {
     private String cpf;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private TipoConta tipo;
     private int pontosFidelidade;
 =======
@@ -20,6 +21,14 @@ public class Cliente {
 <<<<<<< HEAD
     public Cliente(String nome, String cpf, TipoConta tipo) {
 =======
+    public Cliente(String nome, String cpf, String senha, String tipo) {
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
+    private String senha;
+    private String tipo;
+    private List<Conta> contas;
+    private int pontosFidelidade;
+
     public Cliente(String nome, String cpf, String senha, String tipo) {
 >>>>>>> parent of 363e7f4 (refatoração do código)
 =======
@@ -126,6 +135,7 @@ public class Cliente {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     // TIPOS CLIENTES
 
@@ -170,6 +180,9 @@ public class Cliente {
     }
 
 }
+=======
+}
+>>>>>>> parent of 363e7f4 (refatoração do código)
 =======
 }
 >>>>>>> parent of 363e7f4 (refatoração do código)

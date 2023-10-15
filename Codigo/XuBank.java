@@ -14,6 +14,9 @@ import Codigo.Conta.RendaFixa;
 import java.util.Scanner;
 import java.util.List;
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 363e7f4 (refatoração do código)
+=======
 >>>>>>> parent of 363e7f4 (refatoração do código)
 =======
 >>>>>>> parent of 363e7f4 (refatoração do código)
@@ -56,6 +59,7 @@ public class XuBank {
                         case 1:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             cliente = new ClienteRegular(nome, cpf, TipoConta.REGULAR);
                             break;
                         case 2:
@@ -63,6 +67,15 @@ public class XuBank {
                             break;
                         case 3:
                             cliente = new ClienteVIP(nome, cpf, TipoConta.VIP);
+=======
+                            cliente = new Regular(nome, cpf, senha, "Regular");
+                            break;
+                        case 2:
+                            cliente = new Gold(nome, cpf, senha, "Gold");
+                            break;
+                        case 3:
+                            cliente = new VIP(nome, cpf, senha, "VIP");
+>>>>>>> parent of 363e7f4 (refatoração do código)
 =======
                             cliente = new Regular(nome, cpf, senha, "Regular");
                             break;
@@ -220,6 +233,7 @@ public class XuBank {
                                     System.out.println("Opção inválida!");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             }
                         }
                     } else {
@@ -238,6 +252,9 @@ public class XuBank {
         scanner.close();
     }
 }
+=======
+                                }
+>>>>>>> parent of 363e7f4 (refatoração do código)
 =======
                                 }
 >>>>>>> parent of 363e7f4 (refatoração do código)
