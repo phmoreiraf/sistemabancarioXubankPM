@@ -1,5 +1,6 @@
 package Codigo;
 
+<<<<<<< HEAD
 import java.util.*;
 
 import Codigo.Cliente.ClienteGold;
@@ -9,6 +10,10 @@ import Codigo.Conta.ContaCorrente;
 import Codigo.Conta.Investimento;
 import Codigo.Conta.Poupanca;
 import Codigo.Conta.RendaFixa;
+=======
+import java.util.Scanner;
+import java.util.List;
+>>>>>>> parent of 363e7f4 (refatoração do código)
 
 public class XuBank {
     public static Cliente cliente;
@@ -46,6 +51,7 @@ public class XuBank {
 
                     switch (tipoCliente) {
                         case 1:
+<<<<<<< HEAD
                             cliente = new ClienteRegular(nome, cpf, TipoConta.REGULAR);
                             break;
                         case 2:
@@ -53,6 +59,15 @@ public class XuBank {
                             break;
                         case 3:
                             cliente = new ClienteVIP(nome, cpf, TipoConta.VIP);
+=======
+                            cliente = new Regular(nome, cpf, senha, "Regular");
+                            break;
+                        case 2:
+                            cliente = new Gold(nome, cpf, senha, "Gold");
+                            break;
+                        case 3:
+                            cliente = new VIP(nome, cpf, senha, "VIP");
+>>>>>>> parent of 363e7f4 (refatoração do código)
                             break;
                         default:
                             System.out.println("Tipo de cliente inválido!");
@@ -139,6 +154,7 @@ public class XuBank {
                                     scanner.nextLine(); // Consumir a quebra de linha
                                     cliente.sacar(valorSaque, indiceContaSaque);
                                     break;
+
                                 case 4:
                                     // Transferência
                                     System.out.println("Digite o valor a ser transferido:");
@@ -185,10 +201,11 @@ public class XuBank {
                                     }
                                     break;
                                 case 0:
-                                    clienteLogado = false; // Sair da conta do cliente
+                                    cliente = null; // Sair da conta do cliente
                                     break;
                                 default:
                                     System.out.println("Opção inválida!");
+<<<<<<< HEAD
                             }
                         }
                     } else {
@@ -207,3 +224,6 @@ public class XuBank {
         scanner.close();
     }
 }
+=======
+                                }
+>>>>>>> parent of 363e7f4 (refatoração do código)

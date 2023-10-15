@@ -35,6 +35,22 @@ public abstract class Conta implements ContaInterface {
         this.extrato = new ArrayList<>();
     }
 
+<<<<<<< HEAD
+=======
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public List<String> getExtrato() {
+        return extrato;
+    }
+
+    @Override
+    public double getSaldo() {
+        return saldo;
+    }
+
+>>>>>>> parent of 363e7f4 (refatoração do código)
     @Override
     public void depositar(double valor) {
         saldo += valor;
@@ -55,6 +71,7 @@ public abstract class Conta implements ContaInterface {
     public void registrarTransacao(String transacao) {
         extrato.add(transacao);
     }
+<<<<<<< HEAD
 
     public abstract void atualizarSaldo();
 
@@ -215,4 +232,8 @@ public abstract class Conta implements ContaInterface {
     //         }
     //     }
     // }
+=======
+
+    public abstract void atualizarSaldo();
+>>>>>>> parent of 363e7f4 (refatoração do código)
 }

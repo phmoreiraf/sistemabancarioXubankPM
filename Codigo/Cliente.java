@@ -1,15 +1,26 @@
 package Codigo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Cliente {
+public class Cliente {
     private String nome;
     private String cpf;
+<<<<<<< HEAD
     private TipoConta tipo;
     private int pontosFidelidade;
+=======
+    private String senha;
+    private String tipo;
+>>>>>>> parent of 363e7f4 (refatoração do código)
     private List<Conta> contas;
+    private int pontosFidelidade;
 
+<<<<<<< HEAD
     public Cliente(String nome, String cpf, TipoConta tipo) {
+=======
+    public Cliente(String nome, String cpf, String senha, String tipo) {
+>>>>>>> parent of 363e7f4 (refatoração do código)
         this.nome = nome;
         this.cpf = cpf;
         this.tipo = tipo;
@@ -25,7 +36,7 @@ public abstract class Cliente {
         return cpf;
     }
 
-    public TipoConta getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
@@ -84,9 +95,9 @@ public abstract class Cliente {
     public void atualizarPontosFidelidade() {
         for (Conta conta : contas) {
             double saldo = conta.getSaldo();
-            if (tipo == TipoConta.GOLD && saldo >= 1000) {
+            if ("Gold".equals(tipo) && saldo >= 1000) {
                 pontosFidelidade += 10;
-            } else if (tipo == TipoConta.VIP && saldo >= 2000) {
+            } else if ("VIP".equals(tipo) && saldo >= 2000) {
                 pontosFidelidade += 30;
             }
         }
@@ -104,6 +115,7 @@ public abstract class Cliente {
             System.out.println("Pontos de fidelidade insuficientes para trocar por recompensas.");
         }
     }
+<<<<<<< HEAD
 
     // TIPOS CLIENTES
 
@@ -148,3 +160,6 @@ public abstract class Cliente {
     }
 
 }
+=======
+}
+>>>>>>> parent of 363e7f4 (refatoração do código)
