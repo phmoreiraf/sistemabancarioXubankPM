@@ -1,4 +1,4 @@
-package Codigo;
+package codigo.main.java.codigo;
 
 public class Investimento extends Conta {
 
@@ -6,6 +6,15 @@ public class Investimento extends Conta {
 
     public Investimento(Cliente cliente) {
         super(cliente);
+    }
+
+    public Investimento(String cpf, double saldo) {
+        super(cpf, saldo);
+    }
+    
+    @Override
+    public String getTipoConta() {
+        return "INVESTIMENTO";
     }
 
     @Override

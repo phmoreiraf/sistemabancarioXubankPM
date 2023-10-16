@@ -1,4 +1,4 @@
-package Codigo;
+package codigo.main.java.codigo;
 
 public class ContaCorrente extends Conta {
 
@@ -8,7 +8,17 @@ public class ContaCorrente extends Conta {
     public ContaCorrente(Cliente cliente) {
         super(cliente);
     }
+    
+    public ContaCorrente(String cpf, double saldo) {
+        super(cpf, saldo);
+    }
+    
 
+    @Override
+    public String getTipoConta() {
+        return "CORRENTE";
+    }
+    
     @Override
     public void atualizarSaldo() {
         double saldoAnterior = getSaldo();

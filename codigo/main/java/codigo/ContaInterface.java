@@ -1,4 +1,4 @@
-package Codigo;
+package codigo.main.java.codigo;
 
 public interface ContaInterface {
     void depositar(double valor);

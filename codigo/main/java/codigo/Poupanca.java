@@ -1,4 +1,4 @@
-package Codigo;
+package codigo.main.java.codigo;
 
 public class Poupanca extends Conta {
 
@@ -6,6 +6,15 @@ public class Poupanca extends Conta {
 
     public Poupanca(Cliente cliente) {
         super(cliente);
+    }
+
+    public Poupanca(String cpf, double saldo) {
+        super(cpf, saldo);
+    }
+
+    @Override
+    public String getTipoConta() {
+        return "POUPANCA";
     }
 
     @Override

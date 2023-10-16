@@ -1,12 +1,16 @@
-package Codigo;
+package codigo.main.java.codigo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class XuBank {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Cliente cliente = null;
-
         boolean sair = false;
 
         while (!sair) {
@@ -40,23 +44,33 @@ public class XuBank {
 
                     switch (tipoCliente) {
                         case 1:
-                            cliente = new ClienteRegular(nome, cpf, senha, TipoConta.REGULAR);
+                            cliente = new ClienteRegular(nome, cpf, senha, TipoCliente.REGULAR);
                             break;
                         case 2:
-                            cliente = new ClienteGold(nome, cpf, senha, TipoConta.GOLD);
+                            cliente = new ClienteGold(nome, cpf, senha, TipoCliente.GOLD);
                             break;
                         case 3:
-                            cliente = new ClienteVIP(nome, cpf, senha, TipoConta.VIP);
+                            cliente = new ClienteVIP(nome, cpf, senha, TipoCliente.VIP);
                             break;
                         default:
                             System.out.println("Tipo de cliente inválido!");
                             break;
                     }
+
+                    // Adicionar o cliente ao arquivo
+                    Cliente.adicionarClienteAoArquivo(nome, cpf, senha, cliente.getTipo());
                     break;
                 case 2:
-                    // Acesso à conta de cliente existente
+                    // Verificar se o CPF e senha correspondem a um cliente existente
+                    System.out.println("Digite o CPF do cliente:");
+                    String cpfLogin = scanner.nextLine();
+                    System.out.println("Digite a senha do cliente:");
+                    String senhaLogin = scanner.nextLine();
+
+                    cliente = lerClienteDoArquivo(cpfLogin, senhaLogin);
+
                     if (cliente != null) {
-                        System.out.println("Bem-vindo, " + cliente.getNome() + " (" + cliente.getCpf() + ")");
+                        System.out.println("Bem-vindo, " + cliente.getNome() + " (" + Cliente.getCpf() + ")");
                         boolean clienteLogado = true;
 
                         while (clienteLogado) {
@@ -95,7 +109,8 @@ public class XuBank {
                                             System.out.println("Conta poupança criada com sucesso!");
                                             break;
                                         case 3:
-                                            System.out.println("Digite o rendimento contratado para a conta de renda fixa:");
+                                            System.out.println(
+                                                    "Digite o rendimento contratado para a conta de renda fixa:");
                                             double rendimentoContratado = scanner.nextDouble();
                                             scanner.nextLine(); // Consumir a quebra de linha
                                             cliente.adicionarConta(new RendaFixa(cliente, rendimentoContratado));
@@ -114,34 +129,61 @@ public class XuBank {
                                     System.out.println("Digite o valor a ser depositado:");
                                     double valorDeposito = scanner.nextDouble();
                                     scanner.nextLine(); // Consumir a quebra de linha
-                                    System.out.println("Digite o índice da conta para depósito:");
-                                    int indiceContaDeposito = scanner.nextInt();
-                                    scanner.nextLine(); // Consumir a quebra de linha
-                                    cliente.depositar(valorDeposito, indiceContaDeposito);
+                                    System.out.println("Digite o CPF do cliente para depósito:");
+                                    String cpfDeposito = scanner.nextLine();
+
+                                    if (cliente != null && cpfDeposito.equals(Cliente.getCpf())) {
+                                        cliente.depositar(valorDeposito);
+                                        System.out.println("Depósito realizado com sucesso!");
+                                    } else {
+                                        System.out.println(
+                                                "Cliente não encontrado ou CPF incorreto. Depósito não realizado.");
+                                    }
                                     break;
+
                                 case 3:
                                     // Saque
                                     System.out.println("Digite o valor a ser sacado:");
                                     double valorSaque = scanner.nextDouble();
                                     scanner.nextLine(); // Consumir a quebra de linha
-                                    System.out.println("Digite o índice da conta para saque:");
-                                    int indiceContaSaque = scanner.nextInt();
-                                    scanner.nextLine(); // Consumir a quebra de linha
-                                    cliente.sacar(valorSaque, indiceContaSaque);
+
+                                    System.out.println("Digite o CPF do cliente para saque:");
+                                    String cpfSaque = scanner.nextLine();
+
+                                    if (cliente != null && cpfSaque.equals(Cliente.getCpf())) {
+                                        cliente.sacar(valorSaque, cpfSaque);
+                                        System.out.println("Saque realizado com sucesso!");
+                                    } else {
+                                        System.out.println(
+                                                "Cliente não encontrado ou CPF incorreto. Saque não realizado.");
+                                    }
                                     break;
-                                case 4:
-                                    // Transferência
-                                    System.out.println("Digite o valor a ser transferido:");
-                                    double valorTransferencia = scanner.nextDouble();
-                                    scanner.nextLine(); // Consumir a quebra de linha
-                                    System.out.println("Digite o índice da conta de origem para transferência:");
-                                    int indiceContaOrigem = scanner.nextInt();
-                                    scanner.nextLine(); // Consumir a quebra de linha
-                                    System.out.println("Digite o índice da conta de destino para transferência:");
-                                    int indiceContaDestino = scanner.nextInt();
-                                    scanner.nextLine(); // Consumir a quebra de linha
-                                    cliente.transferir(valorTransferencia, indiceContaOrigem, indiceContaDestino);
-                                    break;
+
+                                 case 4:
+    // Transferir
+    System.out.println("Digite o valor a ser transferido:");
+    double valorTransferencia = scanner.nextDouble();
+    scanner.nextLine(); // Consumir a quebra de linha
+    System.out.println("Digite o CPF do cliente de origem:");
+    String cpfOrigem = scanner.nextLine();
+    System.out.println("Digite o CPF do cliente de destino:");
+    String cpfDestino = scanner.nextLine();
+
+    // Verifica se o CPF de origem e destino existem no sistema
+    Cliente clienteOrigem = buscarClientePorCPF(cpfOrigem);
+    Cliente clienteDestino = buscarClientePorCPF(cpfDestino);
+
+    if (clienteOrigem != null && clienteDestino != null) {
+        boolean transferenciaEfetuada = clienteOrigem.transferir(valorTransferencia, cpfOrigem, cpfDestino);
+        if (transferenciaEfetuada) {
+            System.out.println("Transferência realizada com sucesso!");
+        } else {
+            System.out.println("Saldo insuficiente para transferência ou erro interno.");
+        }
+    } else {
+        System.out.println("Cliente de origem e/ou destino não encontrado. Transferência não realizada.");
+    }
+    break;
                                 case 5:
                                     // Consulta de saldo
                                     cliente.consultarSaldo();
@@ -179,7 +221,7 @@ public class XuBank {
                             }
                         }
                     } else {
-                        System.out.println("Nenhum cliente logado. Crie um cliente primeiro.");
+                        System.out.println("CPF ou senha incorreta!");
                     }
                     break;
                 case 0:
@@ -192,5 +234,94 @@ public class XuBank {
         }
 
         scanner.close();
+    }
+
+    public static Cliente lerClienteDoArquivo(String cpfLogin, String senhaLogin) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("clientes.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(",");
+                if (partes.length == 4) {
+                    String cpf = partes[1];
+                    String senha = partes[2];
+                    if (cpf.equals(cpfLogin) && senha.equals(senhaLogin)) {
+                        TipoCliente tipoCliente = TipoCliente.valueOf(partes[3]);
+                        switch (tipoCliente) {
+                            case REGULAR:
+                                return new ClienteRegular(partes[0], cpf, senha, tipoCliente);
+                            case GOLD:
+                                return new ClienteGold(partes[0], cpf, senha, tipoCliente);
+                            case VIP:
+                                return new ClienteVIP(partes[0], cpf, senha, tipoCliente);
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+        return null; // Retorna null se não encontrar o cliente
+    }
+
+    public static List<Conta> lerContasDoArquivo() {
+        List<Conta> contas = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("contas.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(",");
+                if (partes.length == 3) {
+                    String cpf = partes[0];
+                    TipoConta tipoConta = TipoConta.valueOf(partes[1].toUpperCase()); // Converte para enum
+                    double saldo = Double.parseDouble(partes[2]);
+
+                    // Crie a instância apropriada de Conta com base no tipoConta e adicione à lista
+                    // de contas
+                    switch (tipoConta) {
+                        case CORRENTE:
+                            contas.add(new ContaCorrente(cpf, saldo));
+                            break;
+                        case POUPANCA:
+                            contas.add(new Poupanca(cpf, saldo));
+                            break;
+                        case RENDAFIXA:
+                            contas.add(new RendaFixa(cpf, saldo));
+                            break;
+                        case INVESTIMENTO:
+                            contas.add(new Investimento(cpf, saldo));
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo de contas: " + e.getMessage());
+        }
+        return contas;
+    }
+
+      public static Cliente buscarClientePorCPF(String cpf) {
+        String arquivoContas = "contas.txt";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivoContas))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(",");
+                String cpfLido = partes[0].trim();
+                String tipoConta = partes[1].trim();
+                double saldo = Double.parseDouble(partes[2].trim());
+
+                // Verifica se o CPF lido corresponde ao CPF fornecido
+                if (cpfLido.equals(cpf)) {
+                    // Crie um cliente com os dados lidos do arquivo
+                    // Certifique-se de criar o construtor apropriado no Cliente
+                    Cliente cliente = new Cliente(cpf, tipoConta, saldo);
+
+                    return cliente; // Retorna o cliente encontrado
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo de contas: " + e.getMessage());
+        }
+
+        return null; // Retorna null se o cliente não for encontrado no arquivo
     }
 }

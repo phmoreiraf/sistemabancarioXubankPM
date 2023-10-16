@@ -1,9 +1,9 @@
-package Codigo;
+package codigo.main.java.codigo;
 
 public class ClienteVIP extends Cliente {
     private int pontosFidelidade;
 
-    public ClienteVIP(String nome, String cpf, String senha, TipoConta tipo) {
+    public ClienteVIP(String nome, String cpf, String senha, TipoCliente tipo) {
         super(nome, cpf, senha, tipo);
         this.pontosFidelidade = 0;
     }

@@ -1,4 +1,4 @@
-package Codigo;
+package codigo.main.java.codigo;
 
 public class RendaFixa extends Conta {
 
@@ -8,6 +8,15 @@ public class RendaFixa extends Conta {
     public RendaFixa(Cliente cliente, double taxaRendimento) {
         super(cliente);
         this.taxaRendimento = taxaRendimento;
+    }
+    
+    public RendaFixa(String cpf, double saldo) {
+        super(cpf, saldo);
+    }
+
+    @Override
+    public String getTipoConta() {
+        return "RENDAFIXA";
     }
 
     @Override
