@@ -320,13 +320,13 @@ public class XuBank {
                     // Crie uma instância da classe concreta apropriada com base no tipo de cliente
                     switch (tipoCliente) {
                         case REGULAR:
-                            cliente = new ClienteRegular("", cpf, "", tipoCliente);
+                            cliente = new ClienteRegular("", cpf, "", TipoCliente.REGULAR);
                             break;
                         case GOLD:
-                            cliente = new ClienteGold("", cpf, "", tipoCliente);
+                            cliente = new ClienteGold("", cpf, "", TipoCliente.GOLD);
                             break;
                         case VIP:
-                            cliente = new ClienteVIP("", cpf, "", tipoCliente);
+                            cliente = new ClienteVIP("", cpf, "", TipoCliente.VIP);
                             break;
                         default:
                             // Lida com tipos de cliente desconhecidos
