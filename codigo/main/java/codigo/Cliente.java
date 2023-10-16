@@ -159,7 +159,7 @@ public abstract class Cliente {
         }
     } 
    
-    public void transferir(double valor, String cpfRemetente, String cpfDestinatario) {
+    public boolean transferir(double valor, String cpfRemetente, String cpfDestinatario) {
         List<Conta> contas = XuBank.lerContasDoArquivo();
     
         Conta contaRemetente = null;
@@ -167,10 +167,12 @@ public abstract class Cliente {
     
         // Encontre as contas do remetente e destinatário
         for (Conta conta : contas) {
-            if (conta.getCliente().getCpf().equals(cpfRemetente)) {
+            conta.getCliente();
+            if (Cliente.getCpf().equals(cpfRemetente)) {
                 contaRemetente = conta;
             }
-            if (conta.getCliente().getCpf().equals(cpfDestinatario)) {
+            conta.getCliente();
+            if (Cliente.getCpf().equals(cpfDestinatario)) {
                 contaDestinatario = conta;
             }
             if (contaRemetente != null && contaDestinatario != null) {
@@ -188,16 +190,16 @@ public abstract class Cliente {
                 Conta.atualizarSaldoNoArquivoDeposito(cpfDestinatario, contaDestinatario.getTipoConta(), valor);
     
                 System.out.println("Transferência de " + valor + " realizada com sucesso da conta " + contaRemetente.getTipoConta() + " para a conta " + contaDestinatario.getTipoConta() + ".");
+                return true; // Transferência bem-sucedida
             } else {
                 System.out.println("Saldo insuficiente para a transferência. Transferência não realizada.");
             }
         } else {
             System.out.println("Conta do remetente e/ou destinatário não encontrada. Transferência não realizada.");
         }
+        return false; // Transferência sem sucesso
     }
-    
-
-
+   
     // Método para atualizar os pontos de fidelidade com base no tipo de cliente e
     // saldo total
     public void atualizarPontosFidelidade() {
@@ -210,8 +212,7 @@ public abstract class Cliente {
             }
         }
     }
-
-    // Método para trocar pontos de fidelidade por recompensas
+    
     public void trocarPontosPorRecompensas() {
         int pontosNecessarios = 100; // Exemplo de pontos necessários para trocar por uma recompensa
         if (pontosFidelidade >= pontosNecessarios) {
