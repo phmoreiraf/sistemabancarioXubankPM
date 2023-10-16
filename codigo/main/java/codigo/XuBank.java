@@ -310,7 +310,7 @@ public class XuBank {
                 String[] partes = linha.split(",");
                 String cpfLido = partes[0].trim();
                 String tipoConta = partes[1].trim();
-                //double saldo = Double.parseDouble(partes[2].trim());
+                double saldo = Double.parseDouble(partes[2].trim());
 
                 // Verifica se o CPF lido corresponde ao CPF fornecido
                 if (cpfLido.equals(cpf)) {
@@ -334,7 +334,7 @@ public class XuBank {
                     }
 
                     // Defina o saldo da conta no cliente (se necessário)
-                    // cliente.definirSaldo(saldo);
+                    cliente.definirSaldo(saldo);
 
                     return cliente; // Retorna o cliente encontrado
                 }
