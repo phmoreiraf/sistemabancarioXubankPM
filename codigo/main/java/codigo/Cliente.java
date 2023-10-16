@@ -129,14 +129,15 @@ public abstract class Cliente {
                 System.out.println(i + ". " + contasAssociadas.get(i).getTipoConta());
             }
             
-            // Pedir ao cliente para escolher uma conta
-            Scanner scanner = new Scanner(System.in);
-            int indiceContaEscolhida = scanner.nextInt();
-            scanner.nextLine(); // Consumir a quebra de linha
-            
-            if (indiceContaEscolhida >= 0 && indiceContaEscolhida < contasAssociadas.size()) {
-                // Obter a conta escolhida
-                contaDoCliente = contasAssociadas.get(indiceContaEscolhida);
+            try (// Pedir ao cliente para escolher uma conta
+            Scanner scanner = new Scanner(System.in)) {
+                int indiceContaEscolhida = scanner.nextInt();
+                scanner.nextLine(); // Consumir a quebra de linha
+                
+                if (indiceContaEscolhida >= 0 && indiceContaEscolhida < contasAssociadas.size()) {
+                    // Obter a conta escolhida
+                    contaDoCliente = contasAssociadas.get(indiceContaEscolhida);
+                }
             }
         }
     

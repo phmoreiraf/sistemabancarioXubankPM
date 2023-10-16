@@ -159,31 +159,34 @@ public class XuBank {
                                     }
                                     break;
 
-                                 case 4:
-    // Transferir
-    System.out.println("Digite o valor a ser transferido:");
-    double valorTransferencia = scanner.nextDouble();
-    scanner.nextLine(); // Consumir a quebra de linha
-    System.out.println("Digite o CPF do cliente de origem:");
-    String cpfOrigem = scanner.nextLine();
-    System.out.println("Digite o CPF do cliente de destino:");
-    String cpfDestino = scanner.nextLine();
+                                case 4:
+                                    // Transferir
+                                    System.out.println("Digite o valor a ser transferido:");
+                                    double valorTransferencia = scanner.nextDouble();
+                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    System.out.println("Digite o CPF do cliente de origem:");
+                                    String cpfOrigem = scanner.nextLine();
+                                    System.out.println("Digite o CPF do cliente de destino:");
+                                    String cpfDestino = scanner.nextLine();
 
-    // Verifica se o CPF de origem e destino existem no sistema
-    Cliente clienteOrigem = buscarClientePorCPF(cpfOrigem);
-    Cliente clienteDestino = buscarClientePorCPF(cpfDestino);
+                                    // Verifica se o CPF de origem e destino existem no sistema
+                                    Cliente clienteOrigem = buscarClientePorCPF(cpfOrigem);
+                                    Cliente clienteDestino = buscarClientePorCPF(cpfDestino);
 
-    if (clienteOrigem != null && clienteDestino != null) {
-        boolean transferenciaEfetuada = clienteOrigem.transferir(valorTransferencia, cpfOrigem, cpfDestino);
-        if (transferenciaEfetuada) {
-            System.out.println("Transferência realizada com sucesso!");
-        } else {
-            System.out.println("Saldo insuficiente para transferência ou erro interno.");
-        }
-    } else {
-        System.out.println("Cliente de origem e/ou destino não encontrado. Transferência não realizada.");
-    }
-    break;
+                                    if (clienteOrigem != null && clienteDestino != null) {
+                                        boolean transferenciaEfetuada = clienteOrigem.transferir(valorTransferencia,
+                                                cpfOrigem, cpfDestino);
+                                        if (transferenciaEfetuada) {
+                                            System.out.println("Transferência realizada com sucesso!");
+                                        } else {
+                                            System.out
+                                                    .println("Saldo insuficiente para transferência ou erro interno.");
+                                        }
+                                    } else {
+                                        System.out.println(
+                                                "Cliente de origem e/ou destino não encontrado. Transferência não realizada.");
+                                    }
+                                    break;
                                 case 5:
                                     // Consulta de saldo
                                     cliente.consultarSaldo();
@@ -298,7 +301,7 @@ public class XuBank {
         return contas;
     }
 
-      public static Cliente buscarClientePorCPF(String cpf) {
+    public static Cliente buscarClientePorCPF(String cpf) {
         String arquivoContas = "contas.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivoContas))) {
@@ -307,13 +310,31 @@ public class XuBank {
                 String[] partes = linha.split(",");
                 String cpfLido = partes[0].trim();
                 String tipoConta = partes[1].trim();
-                double saldo = Double.parseDouble(partes[2].trim());
+                //double saldo = Double.parseDouble(partes[2].trim());
 
                 // Verifica se o CPF lido corresponde ao CPF fornecido
                 if (cpfLido.equals(cpf)) {
-                    // Crie um cliente com os dados lidos do arquivo
-                    // Certifique-se de criar o construtor apropriado no Cliente
-                    Cliente cliente = new Cliente(cpf, tipoConta, saldo);
+                    TipoCliente tipoCliente = TipoCliente.valueOf(tipoConta); // Converte o tipoConta em um enum
+                    Cliente cliente;
+
+                    // Crie uma instância da classe concreta apropriada com base no tipo de cliente
+                    switch (tipoCliente) {
+                        case REGULAR:
+                            cliente = new ClienteRegular("", cpf, "", tipoCliente);
+                            break;
+                        case GOLD:
+                            cliente = new ClienteGold("", cpf, "", tipoCliente);
+                            break;
+                        case VIP:
+                            cliente = new ClienteVIP("", cpf, "", tipoCliente);
+                            break;
+                        default:
+                            // Lida com tipos de cliente desconhecidos
+                            return null;
+                    }
+
+                    // Defina o saldo da conta no cliente (se necessário)
+                    // cliente.definirSaldo(saldo);
 
                     return cliente; // Retorna o cliente encontrado
                 }
