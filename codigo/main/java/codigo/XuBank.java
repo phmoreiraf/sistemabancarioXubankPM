@@ -1,15 +1,11 @@
 package codigo.main.java.codigo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class XuBank {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         Cliente cliente = null;
         boolean sair = false;
 
@@ -19,28 +15,28 @@ public class XuBank {
             System.out.println("2 - Acessar conta de cliente existente");
             System.out.println("0 - Sair");
 
-            int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir a quebra de linha
+            int opcao = sc.nextInt();
+            sc.nextLine(); // Consumir a quebra de linha
 
             switch (opcao) {
                 case 1:
                     // Criação de um novo cliente
                     System.out.println("Digite o nome do cliente:");
-                    String nome = scanner.nextLine();
+                    String nome = sc.nextLine();
 
                     System.out.println("Digite o CPF do cliente:");
-                    String cpf = scanner.nextLine();
+                    String cpf = sc.nextLine();
 
                     System.out.println("Digite a senha do cliente:");
-                    String senha = scanner.nextLine();
+                    String senha = sc.nextLine();
 
                     System.out.println("Escolha o tipo de cliente:");
                     System.out.println("1. Regular");
                     System.out.println("2. Gold");
                     System.out.println("3. VIP");
 
-                    int tipoCliente = scanner.nextInt();
-                    scanner.nextLine(); // Consumir a quebra de linha
+                    int tipoCliente = sc.nextInt();
+                    sc.nextLine(); // Consumir a quebra de linha
 
                     switch (tipoCliente) {
                         case 1:
@@ -63,9 +59,9 @@ public class XuBank {
                 case 2:
                     // Verificar se o CPF e senha correspondem a um cliente existente
                     System.out.println("Digite o CPF do cliente:");
-                    String cpfLogin = scanner.nextLine();
+                    String cpfLogin = sc.nextLine();
                     System.out.println("Digite a senha do cliente:");
-                    String senhaLogin = scanner.nextLine();
+                    String senhaLogin = sc.nextLine();
 
                     cliente = lerClienteDoArquivo(cpfLogin, senhaLogin);
 
@@ -84,8 +80,8 @@ public class XuBank {
                             System.out.println("7 - Trocar pontos de fidelidade por recompensas");
                             System.out.println("0 - Sair da conta");
 
-                            int opcaoConta = scanner.nextInt();
-                            scanner.nextLine(); // Consumir a quebra de linha
+                            int opcaoConta = sc.nextInt();
+                            sc.nextLine(); // Consumir a quebra de linha
 
                             switch (opcaoConta) {
                                 case 1:
@@ -96,8 +92,8 @@ public class XuBank {
                                     System.out.println("3 - Renda Fixa");
                                     System.out.println("4 - Investimento");
 
-                                    int tipoConta = scanner.nextInt();
-                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    int tipoConta = sc.nextInt();
+                                    sc.nextLine(); // Consumir a quebra de linha
 
                                     switch (tipoConta) {
                                         case 1:
@@ -111,8 +107,8 @@ public class XuBank {
                                         case 3:
                                             System.out.println(
                                                     "Digite o rendimento contratado para a conta de renda fixa:");
-                                            double rendimentoContratado = scanner.nextDouble();
-                                            scanner.nextLine(); // Consumir a quebra de linha
+                                            double rendimentoContratado = sc.nextDouble();
+                                            sc.nextLine(); // Consumir a quebra de linha
                                             cliente.adicionarConta(new RendaFixa(cliente, rendimentoContratado));
                                             System.out.println("Conta de renda fixa criada com sucesso!");
                                             break;
@@ -127,10 +123,10 @@ public class XuBank {
                                 case 2:
                                     // Depósito
                                     System.out.println("Digite o valor a ser depositado:");
-                                    double valorDeposito = scanner.nextDouble();
-                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    double valorDeposito = sc.nextDouble();
+                                    sc.nextLine(); // Consumir a quebra de linha
                                     System.out.println("Digite o CPF do cliente para depósito:");
-                                    String cpfDeposito = scanner.nextLine();
+                                    String cpfDeposito = sc.nextLine();
 
                                     if (cliente != null && cpfDeposito.equals(Cliente.getCpf())) {
                                         cliente.depositar(valorDeposito);
@@ -144,11 +140,11 @@ public class XuBank {
                                 case 3:
                                     // Saque
                                     System.out.println("Digite o valor a ser sacado:");
-                                    double valorSaque = scanner.nextDouble();
-                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    double valorSaque = sc.nextDouble();
+                                    sc.nextLine(); // Consumir a quebra de linha
 
                                     System.out.println("Digite o CPF do cliente para saque:");
-                                    String cpfSaque = scanner.nextLine();
+                                    String cpfSaque = sc.nextLine();
 
                                     if (cliente != null && cpfSaque.equals(Cliente.getCpf())) {
                                         cliente.sacar(valorSaque, cpfSaque);
@@ -162,12 +158,12 @@ public class XuBank {
                                 case 4:
                                     // Transferir
                                     System.out.println("Digite o valor a ser transferido:");
-                                    double valorTransferencia = scanner.nextDouble();
-                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    double valorTransferencia = sc.nextDouble();
+                                    sc.nextLine(); // Consumir a quebra de linha
                                     System.out.println("Digite o CPF do cliente de origem:");
-                                    String cpfOrigem = scanner.nextLine();
+                                    String cpfOrigem = sc.nextLine();
                                     System.out.println("Digite o CPF do cliente de destino:");
-                                    String cpfDestino = scanner.nextLine();
+                                    String cpfDestino = sc.nextLine();
 
                                     // Verifica se o CPF de origem e destino existem no sistema
                                     Cliente clienteOrigem = buscarClientePorCPF(cpfOrigem);
@@ -200,8 +196,8 @@ public class XuBank {
                                 case 7:
                                     // Trocar pontos de fidelidade por recompensas
                                     System.out.println("Digite a quantidade de pontos que deseja usar:");
-                                    int pontos = scanner.nextInt();
-                                    scanner.nextLine(); // Consumir a quebra de linha
+                                    int pontos = sc.nextInt();
+                                    sc.nextLine(); // Consumir a quebra de linha
                                     if (cliente instanceof ClienteGold) {
                                         int pontosFidelidade = ((ClienteGold) cliente).getPontosFidelidade();
                                         if (pontosFidelidade >= pontos) {
@@ -236,7 +232,7 @@ public class XuBank {
             }
         }
 
-        scanner.close();
+        sc.close();
     }
 
     public static Cliente lerClienteDoArquivo(String cpfLogin, String senhaLogin) {
