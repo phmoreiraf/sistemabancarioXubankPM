@@ -10,7 +10,7 @@ public abstract class Cliente {
     private TipoCliente tipo;
     private int pontosFidelidade;
     private List<Conta> contas;
-    private double saldo;
+    private double saldo = 0;
 
     public Cliente(String nome, String cpf, String senha, TipoCliente tipo) {
         this.nome = nome;
@@ -23,6 +23,10 @@ public abstract class Cliente {
 
     public void definirSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+     public Double getSaldo() {
+        return saldo;
     }
 
     public String getNome() {
